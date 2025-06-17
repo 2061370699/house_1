@@ -2,3 +2,6 @@ example of commit
 
 
 example of commit2
+
+
+example of commit3
