@@ -1,0 +1,60 @@
+student_grades = {}
+
+def record_grade():
+    """记录学生成绩到字典中"""
+    student_name = input("请输入学生姓名: ")
+    grade = float(input("请输入学生成绩: "))
+    student_grades[student_name] = grade
+    print(f"{student_name} 的成绩已记录为 {grade}。")
+
+def query_grade():
+    """查询指定学生的成绩"""
+    student_name = input("请输入要查询成绩的学生姓名: ")
+    if student_name in student_grades:
+        grade = student_grades[student_name]
+        print(f"{student_name} 的成绩是 {grade}。")
+    else:
+        print(f"未找到 {student_name} 的成绩记录。")
+
+def statistics_grade():
+    """统计课程成绩的各项指标"""
+    if not student_grades:
+        print("当前没有成绩记录可供统计。")
+        return
+    
+    grades = list(student_grades.values())
+    total = sum(grades)
+    average = total / len(grades)
+    highest = max(grades)
+    lowest = min(grades)
+    passing_count = sum(1 for g in grades if g >= 60)
+    passing_rate = (passing_count / len(grades)) * 100
+    
+    print("\n===== 成绩统计结果 =====")
+    print(f"参与统计人数: {len(grades)} 人")
+    print(f"总分: {total:.2f} 分")
+    print(f"平均分: {average:.2f} 分")
+    print(f"最高分: {highest:.2f} 分")
+    print(f"最低分: {lowest:.2f} 分")
+    print(f"及格人数: {passing_count} 人")
+    print(f"及格率: {passing_rate:.2f}%")
+    print("======================\n")
+
+while True:
+    print("\n请选择操作:")
+    print("1. 记录学生成绩")
+    print("2. 查询学生成绩")
+    print("3. 统计课程成绩")  # 新增统计功能选项
+    print("4. 退出")
+    choice = input("请输入选项编号: ")
+    
+    if choice == '1':
+        record_grade()
+    elif choice == '2':
+        query_grade()
+    elif choice == '3':
+        statistics_grade()  # 调用新增的统计功能
+    elif choice == '4':
+        break
+    else:
+        print("无效的选项，请重新输入。")
